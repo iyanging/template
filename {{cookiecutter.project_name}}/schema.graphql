@@ -1,0 +1,53 @@
+# TODO: This is a sample file, Please edit it after imitative writing
+
+scalar Upload
+scalar Timestamp
+
+type RawFile {
+    data: String!
+    name: String
+}
+
+type File {
+    id: ID!
+    name: String!
+    url: String!
+}
+
+interface TimeMixin {
+    createdAt: Timestamp!
+    updatedAt: Timestamp!
+}
+
+"""
+公司职员
+"""
+type Employee {
+    id: ID!
+    name: String!
+    image: 
+}
+
+"""
+`PENDING`: 会议待召开
+`IN_PROGRESS`: 会议进行中
+`FINISHED`: 会议已结束
+"""
+enum MeetingStatus {
+    PENDING
+    IN_PROGRESS
+    FINISHED
+}
+
+type Meeting implements TimeMixin {
+    id: ID!
+    name: String!
+    host: Employee!
+    status: MeetingStatus!
+    beginAt: Timestamp!
+    endAt: Timestamp!
+    location: String!
+    participants: [Employee!]!
+    "the image of signature"
+    signature: [File!]
+}
