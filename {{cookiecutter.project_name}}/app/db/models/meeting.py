@@ -1,9 +1,8 @@
 # TODO: This is a sample file, Please remove it after imitative writing
 
-from sqlalchemy import Column, DateTime, Float, ForeignKey, String
-
 from app import types
 from app.db.base_class import Base, Enum, SoftDeleteMixin, TimeMixin
+from sqlalchemy import ARRAY, Column, DateTime, ForeignKey, String
 
 
 class Meeting(Base, TimeMixin, SoftDeleteMixin):
@@ -16,6 +15,4 @@ class Meeting(Base, TimeMixin, SoftDeleteMixin):
     beginAt = Column(DateTime(timezone=True), nullable=False)
     endAt = Column(DateTime(timezone=True), nullable=False)
     location = Column(String, nullable=False)
-    participants = Column(ARRAY)
-    "the image of signature"
-    signature: [File!]
+    participants = Column(ARRAY(String), nullable=False)
