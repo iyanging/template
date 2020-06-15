@@ -53,29 +53,6 @@ def async_celery_task(func):
     return wrapper
 
 
-# def revoke_schedule_tasks(task: Task, args=List[Any]) -> None:
-#     app = task.app
-#     task_name = task.name
-#
-#     schedule_tasks = app.control.inspect().scheduled() or dict()
-#     revoked_tasks = app.control.inspect().revoked() or dict()
-#     revoked_task_ids = [task_id for _, task in revoked_tasks.items() for task_id in task]
-#
-#     scheduled_task_ids = []
-#     for _, tasks in schedule_tasks.items():
-#         for task in tasks:
-#             if (
-#                     (request := task.get('request'))
-#                     and (task_id := request.get('id'))
-#                     and (request.get('name') == task_name)
-#                     and (request.get('args') == args)
-#                     and (task_id not in revoked_task_ids)
-#             ):
-#                 scheduled_task_ids.append(task_id)
-#     for task_id in scheduled_task_ids:
-#         app.control.revoke(task_id)
-
-
 class OnCommitTasks:
     def __init__(self, tasks: Sequence[Callable] = None):
         if tasks is None:

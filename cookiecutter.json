@@ -1,5 +1,9 @@
 {
     "project_name": "$$$",
     "py_ver_major_minor": ["3.8"],
-    "py_ver_micro": ["2"]
+    "py_ver_micro": ["2"],
+    "postgres_username": "postgres",
+    "postgres_password": "postgres",
+    "minio_access_key": "admin",
+    "minio_secret_key": "teletraan"
 }

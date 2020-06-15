@@ -1,6 +1,4 @@
-# TODO: This is a sample file, Please edit it after imitative writing
-
-from typing import Text
+from typing import Optional, Text
 
 from pydantic import BaseModel, Field
 
@@ -18,3 +16,14 @@ class File(BaseModel):
     spare_part_id: int = None
     thing_repair_id: int = None
     thing_maintenance_id: int = None
+
+
+class CreateFileInput(BaseModel):
+    filename: str
+    checksum: str
+    length: int
+
+
+class RawFile(BaseModel):
+    data: Optional[Text]
+    name: Optional[Text]

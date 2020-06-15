@@ -3,14 +3,15 @@ from inspect import isfunction
 from itertools import chain
 from typing import Any, Callable, Dict, Iterable, List, Mapping, Optional, Union
 
-from app.db import database as db
-from app.db.utils import format_join_row
 from gql.parser import FieldMeta
 from pydantic import BaseModel
 from sqlalchemy.orm import load_only
 from sqlalchemy.orm.query import Query as BaseQuery
 from sqlalchemy.sql import func, literal_column, operators, or_, select
 from sqlalchemy.sql.expression import bindparam
+
+from app.db import database as db
+from app.db.utils import format_join_row
 
 Operator = Callable[..., Any]
 PARSER = Callable[[Any], Any]

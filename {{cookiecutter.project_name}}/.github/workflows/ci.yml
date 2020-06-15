@@ -10,18 +10,18 @@ jobs:
 
     strategy:
       matrix:
-        python-version: [{{cookiecutter.py_ver_major_minor}}]
+        python-version: [3.8]
         os: [ubuntu-latest]
 
-    runs-on: {{"${{ matrix.os }}"}}
+    runs-on: ${{ matrix.os }}
 
     steps:
       - uses: actions/checkout@v2
 
-      - name: {{"Set up Python ${{ matrix.python-version }}"}}
+      - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v1
         with:
-          python-version: {{"${{ matrix.python-version }}"}}
+          python-version: ${{ matrix.python-version }}
 
       # REF: https://github.com/actions/cache/blob/master/examples.md#python---pip
       - name: Cache pip
@@ -29,9 +29,9 @@ jobs:
         if: startsWith(runner.os, 'Linux')
         with:
           path: ~/.cache/pip
-          key: {{"${{ runner.os }}-pip-${{ hashFiles('requirements/local.txt') }}"}}
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements/local.txt') }}
           restore-keys: |
-            {{"${{ runner.os }}-pip-"}}
+            ${{ runner.os }}-pip-
 
       - name: Install dependencies
         run: |

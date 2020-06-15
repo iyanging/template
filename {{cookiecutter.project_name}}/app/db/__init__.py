@@ -2,9 +2,10 @@
 
 from functools import wraps
 
+from databases import Database
+
 from app import settings
 from app.utils import exec_on_commit_tasks, init_on_commit_tasks
-from databases import Database
 
 if settings.TESTING:
     database = Database(settings.DATABASE_URL, force_rollback=True)

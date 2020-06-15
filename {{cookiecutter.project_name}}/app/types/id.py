@@ -1,5 +1,3 @@
-# TODO: This is a sample file, Please edit it after imitative writing
-
 from typing import NewType
 
 from pydantic import BaseModel
