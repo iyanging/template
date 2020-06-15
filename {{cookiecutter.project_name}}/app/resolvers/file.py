@@ -1,15 +1,14 @@
 import time
 from typing import List
 
-from gql import field_resolver, mutate
-from minio.helpers import get_md5_base64digest
-from starlette.datastructures import UploadFile
-
 from app import types
 from app.db import transaction
 from app.db.models import File
 from app.file_storage import minio
 from app.utils import get_attr
+from gql import field_resolver, mutate
+from minio.helpers import get_md5_base64digest
+from starlette.datastructures import UploadFile
 
 
 async def single_upload(file: UploadFile) -> types.File:

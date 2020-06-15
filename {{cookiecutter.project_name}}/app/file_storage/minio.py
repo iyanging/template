@@ -1,9 +1,8 @@
 from datetime import timedelta
 
+from app import settings
 from minio import Minio
 from starlette.datastructures import UploadFile
-
-from app import settings
 
 minio = Minio(
     settings.FILE_ENDPOINT,

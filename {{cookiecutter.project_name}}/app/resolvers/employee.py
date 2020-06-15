@@ -1,10 +1,9 @@
 from typing import Optional
 
-from gql import field_resolver, mutate, query
-from gql.parser import parse_info
-
 from app import types
 from app.db import models, transaction
+from gql import field_resolver, mutate, query
+from gql.parser import parse_info
 
 
 @field_resolver("Employee", "image")

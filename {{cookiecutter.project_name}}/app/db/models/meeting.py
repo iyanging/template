@@ -1,12 +1,11 @@
 # TODO: This is a sample file, Please remove it after imitative writing
 
-from sqlalchemy import Column, DateTime, ForeignKey, String
-from sqlalchemy.orm import relationship
-
 from app import types
 from app.db.base_class import Base, Enum, SoftDeleteMixin, TimeMixin
 from app.db.models.employee import Employee
 from app.db.query import Query
+from sqlalchemy import Column, DateTime, ForeignKey, String
+from sqlalchemy.orm import relationship
 
 
 class MeetingQuery(Query):

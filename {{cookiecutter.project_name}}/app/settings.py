@@ -23,18 +23,21 @@ DEBUG = config('DEBUG', cast=bool, default=False)
 
 TESTING = config('TESTING', cast=bool, default=False)
 
-APP_ID = '4e6f0fd6-7e59-4860-b0c0-1255fb416507'
+APP_ID = 'Please edit this!!!'
 
-DATABASE_URL = config('DATABASE_URL', default='postgresql://postgres:postgres@postgres:5432/eam')
+DATABASE_URL = config(
+    'DATABASE_URL',
+    default='postgresql://{{cookiecutter.postgres_username}}:{{cookiecutter.postgres_password}}@postgres:5432/{{cookiecutter.project_name}}',
+)
 REDIS_URL = config('REDIS_URL', default='redis://redis:6379')
 CELERY_BROKER = config('CELERY_BROKER', default='redis://redis:6379/0')
 
 # file storage
 FILE_ENDPOINT = config('FILE_ENDPOINT', default='minio:9000')
-FILE_ACCESS_KEY = config('FILE_ACCESS_KEY', default='admin')
-FILE_SECRET_KEY = config('FILE_SECRET_KEY', default='teletraan')
+FILE_ACCESS_KEY = config('FILE_ACCESS_KEY', default='{{cookiecutter.minio_access_key}}')
+FILE_SECRET_KEY = config('FILE_SECRET_KEY', default='{{cookiecutter.minio_secret_key}}')
 FILE_SECURE = config('FILE_SECURE', cast=bool, default=False)
-FILE_BUCKET = config('FILE_BUCKET', default='eam')
+FILE_BUCKET = config('FILE_BUCKET', default='{{cookiecutter.project_name}}')
 FILE_REGION = config('FILE_REGION', default='cn-north-1')
 FILE_MAX_AGE = config('FILE_MAX_AGE', cast=int, default=86400)
 

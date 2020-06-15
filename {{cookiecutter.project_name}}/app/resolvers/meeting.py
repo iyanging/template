@@ -1,13 +1,12 @@
 from typing import Iterable
 
-from gql import mutate, query
-from gql.parser import parse_info
-from sqlalchemy import desc
-
 from app import types
 from app.db import models, transaction
 from app.resolvers import utils
 from app.utils import add_on_commit_task
+from gql import mutate, query
+from gql.parser import parse_info
+from sqlalchemy import desc
 
 
 @mutate
@@ -73,8 +72,34 @@ async def delete_meeting(*_, input: dict) -> Iterable[types.ID]:
     ).soft_delete()
 
 
-# TODO:
 @query("exportMeetings")
 async def export_meetings(_, info, input: dict) -> types.RawFile:
-    # loader = info.context["loaders"]["meeting_participant"]
-    pass
+    loader = info.context["loaders"]["meeting_participant"]
+    records = list(
+        await models.Meeting.objects.filter_by_model(types.MeetingFilterInput(**input)).all()
+    )
+    await utils.fetch_many(records, "id", "participants", loader)
+    header = [
+        "会议名陈",
+        "会议主持",
+        "会议状态",
+        "开始时间",
+        "结束时间",
+        "会议地点",
+        "参会者",
+        "创建时间",
+        "最近修改时间",
+    ]
+    cols = [
+        ("name",),
+        ("host", lambda x: x.name),
+        ("status", lambda x: str(x)),
+        ("begin_at", lambda x: utils.datetime_to_ymd(x)),
+        ("end_at", lambda x: utils.datetime_to_ymd(x)),
+        ("location",),
+        ("participants", lambda x: ", ".join([v.name for v in x])),
+        ("created_at", lambda x: utils.datetime_to_ymd(x)),
+        ("updated_at", lambda x: utils.datetime_to_ymd(x)),
+    ]
+    content = utils.export_excel(records, header, cols)
+    return types.RawFile(data=content)

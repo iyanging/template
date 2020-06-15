@@ -1,5 +1,3 @@
-from abc import ABC
-
 from sqlalchemy import Boolean, Column, DateTime, Enum as BaseEnum, Integer, TypeDecorator, func
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.hybrid import hybrid_property
@@ -37,7 +35,7 @@ class SoftDeleteMixin:
     is_deleted = Column('is_deleted', Boolean, nullable=False, server_default=expression.false())
 
 
-class Enum(TypeDecorator, ABC):
+class Enum(TypeDecorator):  # noqa
     impl = BaseEnum
 
     def process_bind_param(self, value, dialect):

@@ -14,8 +14,17 @@ from .id import ID, IDInput
 @enum_type
 class MeetingStatus(Enum):
     PENDING = 1
-    IN_PROGRESS = 1
-    FINISHED = 1
+    IN_PROGRESS = 2
+    FINISHED = 3
+
+    def __str__(self):
+        if self._value_ == 1:
+            return "会议待召开"
+        elif self._value_ == 2:
+            return "会议进行中"
+        elif self._value_ == 3:
+            return "会议已结束"
+        return ""
 
 
 class Meeting(BaseModel):

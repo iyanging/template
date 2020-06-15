@@ -10,7 +10,6 @@ ENV PATH="/opt/venv/bin:$PATH"
 
 ARG PIP_INDEX_URL=https://mirrors.aliyun.com/pypi/simple/
 
-COPY ./packages packages
 COPY ./requirements requirements
 COPY ./requirements.txt requirements.txt
 

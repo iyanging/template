@@ -1,5 +1,4 @@
+from app.settings import CELERY_BROKER
 from celery import Celery
 
-from app.settings import CELERY_BROKER
-
-app = Celery("{{cookiecutter.project_name}}", broker=CELERY_BROKER)
+app = Celery("tmp", broker=CELERY_BROKER)

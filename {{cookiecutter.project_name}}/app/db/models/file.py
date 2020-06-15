@@ -1,7 +1,6 @@
-from sqlalchemy import Column, Integer, String, or_
-
 from app import types
 from app.db.base_class import Base, Query, add_objects
+from sqlalchemy import Column, Integer, String, or_
 
 
 class FileQuery(Query):

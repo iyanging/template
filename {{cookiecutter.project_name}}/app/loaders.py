@@ -2,10 +2,9 @@ from itertools import groupby
 from operator import attrgetter
 from typing import Any, Callable, List, Sequence, TypeVar
 
-from dataloader import DataLoader
-
 from app.db.models import EmployeeImage, File, Meeting, MeetingParticipant
 from app.types import ID
+from dataloader import DataLoader
 
 KT, VT = TypeVar("KT"), TypeVar("VT")
 

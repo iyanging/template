@@ -9,7 +9,7 @@ install:
 
 # initialize project develop environment
 pyenv:
-	pyenv virtualenv 3.8.2 tmp
+	pyenv virtualenv 3.8.2 {{cookiecutter.project_name}}
 	# activate virtualenv -> install deps -> add project root path to import path
 	pyenv local tmp; \
 	eval "$$(pyenv init -)"; \
@@ -41,8 +41,23 @@ test-report: test
 
 # build docker image
 docker-build:
-	docker build -t dcr.teletraan.io/tmp/backend:dev-latest .
+	docker build -t dcr.teletraan.io/{{cookiecutter.project_name}}/backend:dev-latest .
 
 # push docker image to private hub
 docker-push:
-	docker push dcr.teletraan.io/tmp/backend:dev-latest
+	docker push dcr.teletraan.io/{{cookiecutter.project_name}}/backend:dev-latest
+
+history:
+	alembic history
+
+migrations-%:
+	alembic revision --autogenerate -m "$*"
+
+downdb-%:
+	alembic downgrade $*
+
+migrate:
+	alembic upgrade head
+
+cleardb:
+	alembic downgrade base

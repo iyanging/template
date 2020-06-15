@@ -1,12 +1,11 @@
 import logging.config
 from importlib import import_module
 
-from stargql import GraphQL
-
 from app import settings
 from app.db import database
 from app.loaders import context_builder
 from app.redis import redis
+from stargql import GraphQL
 
 # register resolvers
 import_module('app.resolvers')
